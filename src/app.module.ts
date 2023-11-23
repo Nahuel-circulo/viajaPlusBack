@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ItinerariosModule } from './itinerarios/itinerarios.module';
+import { TransportesModule } from './transportes/transportes.module';
+import { CiudadesModule } from './ciudades/ciudades.module';
 
 @Module({
   imports: [
@@ -13,7 +16,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
+      synchronize: true
     }),
-  ],
+    ItinerariosModule,
+    TransportesModule,
+    CiudadesModule
+  ]
 })
 export class AppModule {}
