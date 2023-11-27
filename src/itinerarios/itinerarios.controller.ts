@@ -5,11 +5,13 @@ import {
   Body,
   Patch,
   Param,
-  Delete
+  Delete,
+  Query
 } from '@nestjs/common';
 import { ItinerariosService } from './itinerarios.service';
 import { CreateItinerarioDto } from './dto/create-itinerario.dto';
 import { UpdateItinerarioDto } from './dto/update-itinerario.dto';
+import { SearchParamsDto } from 'src/common/dto/searchParams.dto';
 
 @Controller('itinerarios')
 export class ItinerariosController {
@@ -21,8 +23,9 @@ export class ItinerariosController {
   }
 
   @Get()
-  findAll() {
-    return this.itinerariosService.findAll();
+  findAll(@Query() searchParams: SearchParamsDto) {
+    console.log({ searchParams });
+    return this.itinerariosService.findAll(searchParams);
   }
 
   @Get(':id')
