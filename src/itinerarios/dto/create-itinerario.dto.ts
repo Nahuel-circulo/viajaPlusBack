@@ -1,5 +1,9 @@
-import { IsDateString, IsNumber } from 'class-validator';
+import { IsArray, IsDateString, IsNumber } from 'class-validator';
 
+interface CiudadAndRol {
+  nro_ciudad: number;
+  rol: 'Ciudad Origen' | 'Ciudad Destino' | 'Ciudad Intermedia';
+}
 export class CreateItinerarioDto {
   @IsDateString()
   fech_partida: string;
@@ -12,4 +16,7 @@ export class CreateItinerarioDto {
 
   @IsNumber()
   nro_transporte: number;
+
+  @IsArray()
+  itinerarioCiudad: CiudadAndRol[];
 }

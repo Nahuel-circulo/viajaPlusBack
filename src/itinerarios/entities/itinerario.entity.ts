@@ -29,13 +29,14 @@ export class Itinerario {
   @OneToMany(
     () => ItinerarioCiudad,
     (itinerarioCiudad) => itinerarioCiudad.itinerario,
-    { eager: true }
+    { eager: true, cascade: ['insert'] }
   )
   @JoinColumn()
   itinerarioCiudad: ItinerarioCiudad[];
 
   @ManyToOne(() => Transporte, (transporte) => transporte.nro_transporte, {
-    eager: true
+    eager: true,
+    cascade: true,
   })
   @JoinColumn({ name: 'nro_transporte' })
   transporte: Transporte;

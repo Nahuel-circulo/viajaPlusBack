@@ -2,7 +2,7 @@ import {
   Injectable,
   Logger,
   InternalServerErrorException,
-  Get,
+  Get
 } from '@nestjs/common';
 import { CreateTransporteDto } from './dto/create-transporte.dto';
 import { UpdateTransporteDto } from './dto/update-transporte.dto';
@@ -15,7 +15,7 @@ export class TransportesService {
   private readonly logger = new Logger('TransportesService');
   constructor(
     @InjectRepository(Transporte)
-    private readonly TransporteRepository: Repository<Transporte>,
+    private readonly TransporteRepository: Repository<Transporte>
   ) {}
   async create(createTransporteDto: CreateTransporteDto) {
     try {
@@ -35,7 +35,7 @@ export class TransportesService {
 
   findOne(id: number) {
     return this.TransporteRepository.findOne({
-      where: { nro_transporte: id },
+      where: { nro_transporte: id }
     });
   }
 

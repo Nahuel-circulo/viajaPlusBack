@@ -8,10 +8,12 @@ export class ItinerarioCiudad {
   @PrimaryGeneratedColumn('increment')
  id: number;
   
-  @ManyToOne(() => Itinerario, (itinerario) => itinerario.itinerarioCiudad)
+  @ManyToOne(() => Itinerario, (itinerario) => itinerario.itinerarioCiudad,{
+    cascade:['insert','remove','update'],onDelete:'CASCADE'
+  })
   itinerario: Itinerario;
   
-  @ManyToOne(() => Ciudad, (ciudad) => ciudad.itinerarioCiudad,{eager:true})
+  @ManyToOne(() => Ciudad, (ciudad) => ciudad.itinerarioCiudad,{eager:true,cascade:['insert']})
   @JoinTable()
   ciudad: Ciudad;
 
@@ -26,7 +28,8 @@ export class ItinerarioCiudad {
   rol: string;
 
   @Column({
-    type:'datetime'
+    type:'datetime',
+    default: () => 'CURRENT_TIMESTAMP'
   })
   hor_partida:string;
 }
