@@ -5,6 +5,7 @@ import { ItinerariosModule } from './itinerarios/itinerarios.module';
 import { TransportesModule } from './transportes/transportes.module';
 import { CiudadesModule } from './ciudades/ciudades.module';
 import { CommonModule } from './common/common.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { CommonModule } from './common/common.module';
     ItinerariosModule,
     TransportesModule,
     CiudadesModule,
-    CommonModule
+    CommonModule,
+    UsuarioModule
   ]
 })
 export class AppModule {}

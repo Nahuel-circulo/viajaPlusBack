@@ -22,6 +22,7 @@ export class ItinerariosController {
     return this.itinerariosService.create(createItinerarioDto);
   }
 
+
   @Get()
   findAll(@Query() searchParams: SearchParamsDto) {
     console.log({ searchParams });

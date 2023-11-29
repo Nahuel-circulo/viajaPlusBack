@@ -13,7 +13,7 @@ import { SearchParamsDto } from '../common/dto/searchParams.dto';
 import { Transporte } from '../transportes/entities/transporte.entity';
 import { ItinerarioCiudad } from './entities/itinerarioCiudad.entity';
 import { Ciudad } from 'src/ciudades/entities/ciudad.entity';
-import { async } from 'rxjs';
+
 
 @Injectable()
 export class ItinerariosService {

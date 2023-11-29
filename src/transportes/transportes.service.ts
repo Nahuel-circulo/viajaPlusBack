@@ -9,18 +9,33 @@ import { UpdateTransporteDto } from './dto/update-transporte.dto';
 import { Transporte } from './entities/transporte.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Asiento } from './entities/asiento.entity';
 
 @Injectable()
 export class TransportesService {
   private readonly logger = new Logger('TransportesService');
   constructor(
     @InjectRepository(Transporte)
-    private readonly TransporteRepository: Repository<Transporte>
+    private readonly TransporteRepository: Repository<Transporte>,
+    @InjectRepository(Asiento)
+    private readonly AsientoRepository: Repository<Asiento>,
   ) {}
   async create(createTransporteDto: CreateTransporteDto) {
+
+    const {cant_Asiento} = createTransporteDto;
+
     try {
       const transporte = this.TransporteRepository.create(createTransporteDto);
+      // crear los asientos y asignarlos al transporte
+      transporte.asientos = [];
+      for (let i = 1; i <= cant_Asiento; i++) {
+        const asiento = this.AsientoRepository.create({ nro_asiento: i });
+        transporte.asientos.push(asiento);
+      }
+      console.log(transporte);
+      
       await this.TransporteRepository.save(transporte);
+
       return transporte;
     } catch (error) {
       this.logger.error(error);

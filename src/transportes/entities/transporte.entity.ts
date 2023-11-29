@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Asiento } from './asiento.entity';
 
 @Entity({ name: 'unidad_transporte' })
 export class Transporte {
@@ -19,4 +20,11 @@ export class Transporte {
     type: 'int'
   })
   cant_Asiento: number;
+
+
+  @OneToMany(() => Asiento, asiento => asiento.transporte,{
+    eager: true,
+    cascade: true,
+  })
+   asientos: Asiento[];
 }
