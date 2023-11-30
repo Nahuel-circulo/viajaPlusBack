@@ -45,7 +45,8 @@ export class Pasaje {
   tramo_ciudad_destino: Ciudad;
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
+    default:'Reservado'
   })
   estado: string;
 

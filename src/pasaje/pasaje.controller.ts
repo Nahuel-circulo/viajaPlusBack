@@ -26,6 +26,10 @@ export class PasajeController {
   findOne(@Param('id') id: string) {
     return this.pasajeService.findOne(+id);
   }
+  @Get('/itinerario/:id')
+  findAsientosByItineraios(@Param('id') id: string) {
+    return this.pasajeService.findAsientosByItinerarios(+id);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePasajeDto: UpdatePasajeDto) {

@@ -54,8 +54,8 @@ export class TransportesService {
     });
   }
 
-  update(id: number, updateTransporteDto: UpdateTransporteDto) {
-    return `This action updates a #${id} transporte`;
+  async update(id: number, updateTransporteDto: UpdateTransporteDto) {
+    return await this.TransporteRepository.update(id, updateTransporteDto);
   }
 
   remove(id: number) {

@@ -3,7 +3,7 @@ import { CreatePasajeDto } from './dto/create-pasaje.dto';
 import { UpdatePasajeDto } from './dto/update-pasaje.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Pasaje } from './entities/pasaje.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Ciudad } from 'src/ciudades/entities/ciudad.entity';
 import { Asiento } from 'src/transportes/entities/asiento.entity';
 import { Usuario } from 'src/usuario/entities/usuario.entity';
@@ -97,8 +97,32 @@ export class PasajeService {
     return pasajes
   }
 
-  update(id: number, updatePasajeDto: UpdatePasajeDto) {
-    return `This action updates a #${id} pasaje`;
+  async findAsientosByItinerarios(nro_itinerario: number) {
+
+    const pasajes = await this.pasajeRepository.find({
+      select:{
+        asiento:{
+          nro_asiento: true
+        }
+      },
+      where:{
+        itinerario:{
+          nro_itinerario
+        },
+        estado: In(['reservado', 'pagado'])
+      }
+    })
+    if (!pasajes.length) {
+      throw new NotFoundException('No hay asientos reservados para ese itinerario')
+    }
+    const asientos = pasajes.map(pasaje => pasaje.asiento.id)
+    return asientos
+
+  }
+  async update(id: number, updatePasajeDto: UpdatePasajeDto) {
+    const {estado} = updatePasajeDto
+    await this.pasajeRepository.update(id, {estado})
+    return 'Pasaje Actualizado'
   }
 
   remove(id: number) {

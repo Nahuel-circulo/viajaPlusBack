@@ -13,7 +13,8 @@ export class Ciudad {
   nro_Ciudad: number;
 
   @Column({
-    type: 'varchar'
+    type: 'varchar',
+    collation: 'utf8_general_ci',
   })
   nombre: string;
 
