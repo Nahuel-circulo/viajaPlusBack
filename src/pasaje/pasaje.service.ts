@@ -53,7 +53,7 @@ export class PasajeService {
     // busco asiento
     const asiento = await this.asientoRepository.findOne({
       where: {
-        nro_asiento: createPasajeDto.asiento
+        id: createPasajeDto.asiento
       }
     })
 
@@ -119,6 +119,8 @@ export class PasajeService {
     return asientos
 
   }
+
+
   async update(id: number, updatePasajeDto: UpdatePasajeDto) {
     const {estado} = updatePasajeDto
     await this.pasajeRepository.update(id, {estado})
