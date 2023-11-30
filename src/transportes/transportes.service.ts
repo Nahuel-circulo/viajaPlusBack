@@ -58,7 +58,7 @@ export class TransportesService {
     return await this.TransporteRepository.update(id, updateTransporteDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} transporte`;
+  async remove(id: number) {
+    return this.TransporteRepository.softDelete(id)
   }
 }
