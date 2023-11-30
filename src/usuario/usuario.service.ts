@@ -23,12 +23,11 @@ export class UsuarioService {
 
     const { email, password } = userLoginDTO;
 
-    console.log(email);
     const usuario = await this.usuarioRepository.findOne({
       where:
       {
-        email: userLoginDTO.email,
-        password: userLoginDTO.password,
+        email,
+        password
       },
 
     })

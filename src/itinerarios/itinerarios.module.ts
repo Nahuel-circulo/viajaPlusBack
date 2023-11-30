@@ -14,6 +14,7 @@ import { CiudadesModule } from 'src/ciudades/ciudades.module';
     TypeOrmModule.forFeature([Itinerario, ItinerarioCiudad]),
     TransportesModule,
     CiudadesModule
-  ]
+  ],
+  exports:[ItinerariosService,TypeOrmModule]
 })
 export class ItinerariosModule {}
