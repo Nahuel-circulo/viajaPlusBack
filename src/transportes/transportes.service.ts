@@ -59,6 +59,9 @@ export class TransportesService {
   }
 
   async remove(id: number) {
-    return this.TransporteRepository.softDelete(id)
+    return this.TransporteRepository.delete(id).catch((error) => {
+      this.logger.error(error);
+      throw new InternalServerErrorException('Ayudaaa');
+    })
   }
 }
